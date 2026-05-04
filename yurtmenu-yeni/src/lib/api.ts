@@ -11,7 +11,7 @@ export async function fetchCities(): Promise<City[]> {
   try {
     const res = await fetch(getUrl("/city"), {
       headers: {
-        "x-internal-secret": process.env.INTERNAL_API_SECRET || "",
+        "x-api-key": process.env.INTERNAL_API_SECRET || "",
       },
       next: { revalidate: 86400 },
     });
@@ -33,7 +33,7 @@ export async function fetchMenu(
       getUrl(`/menu?cityId=${cityId}&mealType=${mealType}&date=${date}`),
       {
         headers: {
-          "x-internal-secret": process.env.INTERNAL_API_SECRET || "",
+          "x-api-key": process.env.INTERNAL_API_SECRET || "",
         },
         next: { revalidate: 3600 },
       }
