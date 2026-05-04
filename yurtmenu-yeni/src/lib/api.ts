@@ -1,10 +1,15 @@
 import type { City, MenuItem } from "./types";
 
-const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+const isServer = typeof window === 'undefined';
+const BASE_URL = isServer 
+  ? (process.env.API_BASE || "http://localhost:5000") 
+  : ""; 
+
+const getUrl = (path: string) => isServer ? `${BASE_URL}${path}` : `/api/proxy${path}`;
 
 export async function fetchCities(): Promise<City[]> {
   try {
-    const res = await fetch(`${BASE}/api/proxy/city`, {
+    const res = await fetch(getUrl("/city"), {
       headers: {
         "x-internal-secret": process.env.INTERNAL_API_SECRET || "",
       },
@@ -12,7 +17,8 @@ export async function fetchCities(): Promise<City[]> {
     });
     if (!res.ok) return [];
     return res.json();
-  } catch {
+  } catch (error) {
+    console.error("Fetch Cities Error:", error);
     return [];
   }
 }
@@ -24,7 +30,7 @@ export async function fetchMenu(
 ): Promise<MenuItem[]> {
   try {
     const res = await fetch(
-      `${BASE}/api/proxy/menu?cityId=${cityId}&mealType=${mealType}&date=${date}`,
+      getUrl(`/menu?cityId=${cityId}&mealType=${mealType}&date=${date}`),
       {
         headers: {
           "x-internal-secret": process.env.INTERNAL_API_SECRET || "",
@@ -34,7 +40,8 @@ export async function fetchMenu(
     );
     if (!res.ok) return [];
     return res.json();
-  } catch {
+  } catch (error) {
+    console.error("Fetch Menu Error:", error);
     return [];
   }
 }
