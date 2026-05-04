@@ -1,0 +1,17 @@
+# KYK Yemek Listesi
+
+KYK (Kredi ve Yurtlar Kurumu) yurtlarının günlük kahvaltı ve akşam yemek menülerini listeleyen Türkiye'nin kapsamlı yurt menü sitesi.
+
+## İçerik
+- 81 il KYK yurt menüsü
+- Günlük ve aylık menü takvimi  
+- Kahvaltı ve akşam yemeği listeleri
+- Şehir bazında filtreleme
+
+## API Kaynağı
+Veriler KYK resmi sistemiyle senkronize güncellenir.
+
+## Temel URL'ler
+- /[şehir]/kahvalti — şehir kahvaltı menüsü
+- /[şehir]/aksam — şehir akşam menüsü
+- /sehirler — tüm şehirler

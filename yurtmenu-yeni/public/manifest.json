@@ -1,0 +1,13 @@
+{
+  "name": "KYK Yemek Listesi",
+  "short_name": "KYK Menü",
+  "description": "81 il KYK yurt yemek listesi",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#E11D48",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

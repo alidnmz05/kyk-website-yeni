@@ -1,0 +1,23 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Build output
+bin/
+obj/
+publish/
+TestResults/
+
+# Rider/JetBrains
+.idea/
+
+# Logs
+*.log
+logs/
+
+# Secrets (isteğe bağlı, prod dosyalarını commit etme)
+appsettings.Development.json
+appsettings.Local.json
+appsettings.*.json.user
+secrets.json
