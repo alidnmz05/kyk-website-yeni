@@ -6,6 +6,9 @@ export async function GET() {
     if (sec.error) return Response.json({ error: sec.error }, { status: sec.status });
 
     const res = await fetch(`${process.env.API_BASE}/api/city`, {
+      headers: {
+        "x-api-key": process.env.INTERNAL_API_SECRET || "",
+      },
       next: { revalidate: 86400 },
     });
     if (!res.ok) return Response.json([], { status: 502 });

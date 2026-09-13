@@ -6,14 +6,8 @@ const MAX_REQUESTS_PER_WINDOW = 30; // 30 requests per minute
 
 export async function checkSecurity(): Promise<{ error?: string; status?: number }> {
   const reqHeaders = await headers();
-  
-  // 1. Internal Secret Check
-  const secret = reqHeaders.get("x-internal-secret");
-  if (secret !== process.env.INTERNAL_API_SECRET) {
-    return { error: "Forbidden", status: 403 };
-  }
 
-  // 2. Rate Limiting Check
+  // Rate Limiting Check
   const ip = reqHeaders.get("x-forwarded-for") ?? "127.0.0.1";
   const now = Date.now();
   let rateInfo = rateLimitMap.get(ip);

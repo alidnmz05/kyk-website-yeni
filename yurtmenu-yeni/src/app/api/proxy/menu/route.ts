@@ -14,7 +14,12 @@ export async function GET(request: Request) {
       if (val) safe.set(key, val);
     }
     const upstream = `${process.env.API_BASE}/api/menu/liste?${safe}`;
-    const res = await fetch(upstream, { next: { revalidate: 3600 } });
+    const res = await fetch(upstream, {
+      headers: {
+        "x-api-key": process.env.INTERNAL_API_SECRET || "",
+      },
+      next: { revalidate: 3600 },
+    });
     if (!res.ok) return Response.json([], { status: 502 });
     const data = await res.json();
     return Response.json(data);
